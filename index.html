@@ -65,6 +65,10 @@
             <input type="number" id="plusflex" value="0">
         </div>
         <div class="input-group">
+            <label>ATL kompvila (betald) (-)</label>
+            <input type="number" id="atlkompvila" value="0">
+        </div>
+        <div class="input-group">
             <label>Komp (-)</label>
             <input type="number" id="komp" value="0">
         </div>
@@ -75,6 +79,10 @@
         <div class="input-group">
             <label>Föräldraledig (-)</label>
             <input type="number" id="foraldraledig" value="0">
+        </div>
+        <div class="input-group">
+            <label>Tjänstledig utan lön (-)</label>
+            <input type="number" id="tjanstledig" value="0">
         </div>
         <div class="total">
             <p>Total arbetstid: <span id="total">0</span> timmar</p>
@@ -89,11 +97,13 @@
             let semester = parseFloat(document.getElementById("semester").value) || 0;
             let sjukdom = parseFloat(document.getElementById("sjukdom").value) || 0;
             let plusflex = parseFloat(document.getElementById("plusflex").value) || 0;
+            let atlkompvila = parseFloat(document.getElementById("atlkompvila").value) || 0;
             let komp = parseFloat(document.getElementById("komp").value) || 0;
             let vab = parseFloat(document.getElementById("vab").value) || 0;
             let foraldraledig = parseFloat(document.getElementById("foraldraledig").value) || 0;
+            let tjanstledig = parseFloat(document.getElementById("tjanstledig").value) || 0;
             
-            let total = kalender + plusflex - (flexledig + semester + sjukdom + komp + vab + foraldraledig);
+            let total = kalender + plusflex - (flexledig + semester + sjukdom + komp + vab + foraldraledig + tjanstledig + atlkompvila);
             document.getElementById("total").innerText = total;
         }
     </script>
