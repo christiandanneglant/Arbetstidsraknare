@@ -39,6 +39,19 @@
             text-align: center;
             margin-top: 15px;
         }
+        .hidden {
+            display: none;
+        }
+        .toggle-btn {
+            display: block;
+            margin: 10px auto;
+            padding: 5px 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -64,26 +77,32 @@
             <label>Plusflex (+)</label>
             <input type="number" id="plusflex" value="0">
         </div>
-        <div class="input-group">
-            <label>ATL kompvila (betald) (-)</label>
-            <input type="number" id="atlkompvila" value="0">
+        
+        <button class="toggle-btn" onclick="toggleExtraFields()">Visa fler alternativ</button>
+        
+        <div id="extra-fields" class="hidden">
+            <div class="input-group">
+                <label>ATL kompvila (betald) (-)</label>
+                <input type="number" id="atlkompvila" value="0">
+            </div>
+            <div class="input-group">
+                <label>Komp (-)</label>
+                <input type="number" id="komp" value="0">
+            </div>
+            <div class="input-group">
+                <label>Vab (-)</label>
+                <input type="number" id="vab" value="0">
+            </div>
+            <div class="input-group">
+                <label>Föräldraledig (-)</label>
+                <input type="number" id="foraldraledig" value="0">
+            </div>
+            <div class="input-group">
+                <label>Tjänstledig utan lön (-)</label>
+                <input type="number" id="tjanstledig" value="0">
+            </div>
         </div>
-        <div class="input-group">
-            <label>Komp (-)</label>
-            <input type="number" id="komp" value="0">
-        </div>
-        <div class="input-group">
-            <label>Vab (-)</label>
-            <input type="number" id="vab" value="0">
-        </div>
-        <div class="input-group">
-            <label>Föräldraledig (-)</label>
-            <input type="number" id="foraldraledig" value="0">
-        </div>
-        <div class="input-group">
-            <label>Tjänstledig utan lön (-)</label>
-            <input type="number" id="tjanstledig" value="0">
-        </div>
+        
         <div class="total">
             <p>Total arbetstid: <span id="total">0</span> timmar</p>
         </div>
@@ -91,6 +110,18 @@
     </div>
 
     <script>
+        function toggleExtraFields() {
+            let extraFields = document.getElementById("extra-fields");
+            let btn = document.querySelector(".toggle-btn");
+            if (extraFields.classList.contains("hidden")) {
+                extraFields.classList.remove("hidden");
+                btn.textContent = "Dölj alternativ";
+            } else {
+                extraFields.classList.add("hidden");
+                btn.textContent = "Visa fler alternativ";
+            }
+        }
+        
         function calculateTotal() {
             let kalender = parseFloat(document.getElementById("kalender").value) || 0;
             let flexledig = parseFloat(document.getElementById("flexledig").value) || 0;
