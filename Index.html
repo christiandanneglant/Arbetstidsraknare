@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arbetstidsräknare</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+        }
+        h2 {
+            text-align: center;
+        }
+        .input-group {
+            margin-bottom: 10px;
+        }
+        label {
+            display: block;
+        }
+        input {
+            width: 100%;
+            padding: 5px;
+            margin-top: 5px;
+        }
+        .total {
+            font-weight: bold;
+            text-align: center;
+            margin-top: 15px;
+        }
+        .hidden {
+            display: none;
+        }
+        .toggle-btn {
+            display: block;
+            margin: 10px auto;
+            padding: 5px 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Arbetstidsräknare</h2>
+        <div class="input-group">
+            <label>Kalendertimmar (+)</label>
+            <input type="number" id="kalender" value="0">
+        </div>
+        <div class="input-group">
+            <label>Flexledig (-)</label>
+            <input type="number" id="flexledig" value="0">
+        </div>
+        <div class="input-group">
+            <label>Semester (-)</label>
+            <input type="number" id="semester" value="0">
+        </div>
+        <div class="input-group">
+            <label>Sjukdom (-)</label>
+            <input type="number" id="sjukdom" value="0">
+        </div>
+        <div class="input-group">
+            <label>Plusflex (+)</label>
+            <input type="number" id="plusflex" value="0">
+        </div>
+        
+        <button class="toggle-btn" onclick="toggleExtraFields()">Visa fler alternativ</button>
+        
+        <div id="extra-fields" class="hidden">
+            <div class="input-group">
+                <label>ATL kompvila (betald) (-)</label>
+                <input type="number" id="atlkompvila" value="0">
+            </div>
+            <div class="input-group">
+                <label>Komp (-)</label>
+                <input type="number" id="komp" value="0">
+            </div>
+            <div class="input-group">
+                <label>Vab (-)</label>
+                <input type="number" id="vab" value="0">
+            </div>
+            <div class="input-group">
+                <label>Föräldraledig (-)</label>
+                <input type="number" id="foraldraledig" value="0">
+            </div>
+            <div class="input-group">
+                <label>Tjänstledig utan lön (-)</label>
+                <input type="number" id="tjanstledig" value="0">
+            </div>
+        </div>
+        
+        <div class="total">
+            <p>Total arbetstid: <span id="total">0</span> timmar</p>
+        </div>
+        <button onclick="calculateTotal()">Beräkna</button>
+    </div>
+
+    <script>
+        function toggleExtraFields() {
+            let extraFields = document.getElementById("extra-fields");
+            let btn = document.querySelector(".toggle-btn");
+            if (extraFields.classList.contains("hidden")) {
+                extraFields.classList.remove("hidden");
+                btn.textContent = "Dölj alternativ";
+            } else {
+                extraFields.classList.add("hidden");
+                btn.textContent = "Visa fler alternativ";
+            }
+        }
+        
+        function calculateTotal() {
+            let kalender = parseFloat(document.getElementById("kalender").value) || 0;
+            let flexledig = parseFloat(document.getElementById("flexledig").value) || 0;
+            let semester = parseFloat(document.getElementById("semester").value) || 0;
+            let sjukdom = parseFloat(document.getElementById("sjukdom").value) || 0;
+            let plusflex = parseFloat(document.getElementById("plusflex").value) || 0;
+            let atlkompvila = parseFloat(document.getElementById("atlkompvila").value) || 0;
+            let komp = parseFloat(document.getElementById("komp").value) || 0;
+            let vab = parseFloat(document.getElementById("vab").value) || 0;
+            let foraldraledig = parseFloat(document.getElementById("foraldraledig").value) || 0;
+            let tjanstledig = parseFloat(document.getElementById("tjanstledig").value) || 0;
+            
+            let total = kalender + plusflex - (flexledig + semester + sjukdom + komp + vab + foraldraledig + tjanstledig + atlkompvila);
+            document.getElementById("total").innerText = total;
+        }
+    </script>
+</body>
+</html>
