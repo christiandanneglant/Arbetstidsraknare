@@ -101,6 +101,10 @@
                 <label>Tjänstledig utan lön (-)</label>
                 <input type="number" id="tjanstledig" value="0">
             </div>
+            <div class="input-group">
+                <label>Kurs/konf utb. med lön (Utb i tj) (-)</label>
+                <input type="number" id="kurskonf" value="0">
+            </div>
         </div>
         
         <div class="total">
@@ -133,8 +137,9 @@
             let vab = parseFloat(document.getElementById("vab").value) || 0;
             let foraldraledig = parseFloat(document.getElementById("foraldraledig").value) || 0;
             let tjanstledig = parseFloat(document.getElementById("tjanstledig").value) || 0;
+            let kurskonf = parseFloat(document.getElementById("kurskonf").value) || 0;
             
-            let total = kalender + plusflex - (flexledig + semester + sjukdom + komp + vab + foraldraledig + tjanstledig + atlkompvila);
+            let total = kalender + plusflex - (flexledig + semester + sjukdom + komp + vab + foraldraledig + tjanstledig + atlkompvila + kurskonf);
             document.getElementById("total").innerText = total;
         }
     </script>
